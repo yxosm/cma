@@ -112,6 +112,106 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .navbar-brand img {
+                height: 45px;
+            }
+
+            .review-card {
+                margin: 0.5rem 0;
+                padding: 1.25rem !important;
+            }
+
+            .avatar {
+                width: 48px;
+                height: 48px;
+                font-size: 1rem;
+            }
+
+            .review-stats {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .display-4 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .lead {
+                font-size: 1rem;
+            }
+
+            .display-1 {
+                font-size: 3rem !important;
+            }
+
+            .rating-breakdown {
+                margin-top: 1.5rem;
+            }
+
+            .rating-bar {
+                height: 6px;
+            }
+
+            .btn-primary {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+
+            .modal-dialog {
+                margin: 0.5rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            footer .col-lg-4, 
+            footer .col-lg-3 {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* Additional improvements for extra small devices */
+        @media (max-width: 576px) {
+            .review-stats {
+                padding: 1.25rem;
+                margin: 0.5rem;
+            }
+
+            .stat-card {
+                padding: 0.75rem;
+            }
+
+            .stat-number {
+                font-size: 1.75rem;
+            }
+
+            .display-1 {
+                font-size: 2.5rem !important;
+            }
+
+            .star-rating {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>

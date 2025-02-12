@@ -130,6 +130,67 @@
             padding: 8px 24px; /* Reduced padding */
             font-size: 0.9rem; /* Smaller font size */
         }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .project-card {
+                margin: 0.5rem 0;
+            }
+
+            .project-image {
+                height: 200px;
+                border-radius: 12px;
+            }
+
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 32px;
+                height: 32px;
+                background: rgba(255, 255, 255, 0.9);
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .carousel-control-prev {
+                left: 0.5rem;
+            }
+
+            .carousel-control-next {
+                right: 0.5rem;
+            }
+
+            .navbar-brand img {
+                height: 45px;
+            }
+
+            .metric-number {
+                font-size: 1.75rem;
+            }
+
+            .tech-badge {
+                font-size: 0.75rem;
+                padding: 0.35rem 0.75rem;
+            }
+
+            .modal-image {
+                max-height: 70vh;
+            }
+
+            .btn-primary {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+
+            footer .col-lg-4, 
+            footer .col-lg-3 {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+        }
     </style>
 </head>
 <body>

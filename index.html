@@ -6,9 +6,24 @@
     <title>CarMaster - Next-Gen Auto Body Technology</title>
     <meta name="description" content="CarMaster leverages cutting-edge technology to revolutionize auto body repair in Columbus, OH. AI-powered diagnostics, IoT-enabled repair tracking, and more.">
     
+    <!-- Apple Meta Tags for iMessage -->
+    <meta name="apple-mobile-web-app-title" content="CarMaster Auto">
+    <link rel="apple-touch-icon" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO-GHL9UpZiSY96FVqaaufmDnpWVmpKFN.png">
+    <meta name="format-detection" content="telephone=yes">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="CarMaster - Next-Gen Auto Body Technology">
+    <meta property="og:description" content="CarMaster leverages cutting-edge technology to revolutionize auto body repair in Columbus, OH. AI-powered diagnostics, IoT-enabled repair tracking, and more.">
+    <meta property="og:image" content="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO-GHL9UpZiSY96FVqaaufmDnpWVmpKFN.png">
+    <meta property="og:image:alt" content="CarMaster Auto Logo">
+    <meta property="og:type" content="website">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
         html, body {
             overflow-x: hidden;
@@ -17,26 +32,27 @@
         }
 
         :root {
-            --primary-color: #6366f1;
-            --secondary-color: #4f46e5;
-            --accent-color: #818cf8;
-            --surface-color: rgba(255, 255, 255, 0.95);
+            --primary-color: #e63946;  /* Changed to a bold red */
+            --secondary-color: #1d3557; /* Deep blue */
+            --accent-color: #457b9d;   /* Steel blue */
+            --light-color: #f1faee;
+            --dark-color: #1d1d1d;
         }
 
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fafafa;
+            font-family: 'Barlow', sans-serif;  /* Changed to a more industrial font */
+            background: var(--light-color);
             padding-top: 76px;
         }
 
         /* Recent Projects Banner Styles */
         .recent-projects-banner {
-            margin-top: 56px;
+            margin-top: 0; /* Changed from 56px to 0 */
             position: relative;
         }
 
         .recent-projects-banner .carousel-item {
-            height: 40vh; /* Reduced from 60vh */
+            height: 80vh; /* Changed to 80vh */
             min-height: 300px; /* Reduced from 400px */
         }
 
@@ -52,7 +68,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.08));
+            background: linear-gradient(rgba(29, 29, 29, 0.7), rgba(29, 29, 29, 0.4)); /* Changed gradient */
             z-index: 1;
         }
 
@@ -79,15 +95,20 @@
         .service-icon {
             width: 64px;
             height: 64px;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background: var(--primary-color); /* Changed background */
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
             font-size: 1.5rem;
-            color: white;
-            transform: rotate(-5deg);
+            color: var(--light-color); /* Changed color */
+            transform: rotate(0); /* Changed rotation */
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .service-icon {
+            transform: scale(1.1); /* Added hover effect */
         }
         
         .stars {
@@ -96,8 +117,8 @@
         
         .navbar {
             backdrop-filter: blur(10px);
-            background: var(--surface-color) !important;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            background: rgba(29, 29, 29, 0.95) !important; /* Changed background */
+            border-bottom: 2px solid var(--primary-color); /* Added border */
             transition: all 0.3s ease;
             z-index: 1030;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -107,12 +128,27 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             background: rgba(255, 255, 255, 0.98) !important;
         }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: var(--light-color); /* Changed color */
+        }
+
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: var(--primary-color); /* Added hover effect */
+        }
+
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--primary-color); /* Changed background */
             border: none;
-            padding: 8px 24px; /* Reduced padding */
-            border-radius: 12px;
-            font-size: 0.9rem; /* Smaller font size */
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 12px 30px; /* Changed padding */
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color); /* Added hover effect */
+            transform: translateY(-2px);
         }
 
         .card {
@@ -123,18 +159,22 @@
         }
 
         .hero-section {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(129, 140, 248, 0.1));
+            background: linear-gradient(135deg, var(--secondary-color), var(--dark-color)); /* Changed background */
             padding: 120px 0;
-            margin-top: -56px;
+            margin-top: 0; /* Adjusted from -56px to 0 to maintain consistent spacing */
+            color: var(--light-color); /* Changed color */
         }
 
         .project-card {
             transition: all 0.3s ease;
             overflow: hidden;
+            border: none; /* Changed border */
+            background: var(--light-color); /* Changed background */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Added box-shadow */
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px); /* Changed hover effect */
         }
 
         .project-image {
@@ -192,14 +232,23 @@
             transition: transform 0.6s ease-in-out;
         }
 
+        .review-card {
+            background: var(--light-color); /* Changed background */
+            border: none; /* Changed border */
+        }
+
         /* Enhanced Mobile Experience */
         @media (max-width: 768px) {
             body {
                 padding-top: 60px;
             }
 
+            .recent-projects-banner {
+                margin-top: 20px; /* adjusted margin to scoot up on mobile */
+            }
+
             .recent-projects-banner .carousel-item {
-                height: 30vh;
+                height: 50vh; /* Changed height */
                 min-height: 250px;
             }
 
@@ -214,6 +263,10 @@
             .hero-section {
                 padding: 60px 0;
                 text-align: center;
+            }
+
+            .hero-section .badge {
+                margin-top: 20px; /* adjusted margin to move "Expert Auto Repair" down */
             }
 
             .service-icon {
@@ -297,6 +350,31 @@
             .lead {
                 font-size: 1rem;
             }
+        }
+
+        /* Adding some automotive-themed decorative elements */
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+            margin: 2rem 0;
+        }
+
+        .tool-pattern {
+            background-image: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 2h2v2H2zM6 2h2v2H6zM10 2h2v2h-2zM14 2h2v2h-2zM18 2h2v2h-2z" fill="%23e63946" fill-opacity="0.1"/></svg>');
+            padding: 2rem 0;
+        }
+
+        /* Enhanced hover effects */
+        .service-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -401,7 +479,7 @@
             <div class="row g-4">
                 <!-- Service cards -->
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
+                    <div class="card h-100 service-card">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="bi bi-tools"></i>
@@ -412,29 +490,18 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
+                    <div class="card h-100 service-card">
                         <div class="card-body text-center">
                             <div class="service-icon">
-                                <i class="bi bi-car-front"></i>
+                                <i class="bi bi-tools"></i>
                             </div>
-                            <h3 class="h5">Smart Rentals</h3>
-                            <p class="card-text">App-based rental car service with contactless pickup</p>
+                            <h3 class="h5">Rental Assistance</h3>
+                            <p class="card-text">We help coordinate rental vehicles through your insurance coverage during repairs.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <div class="service-icon">
-                                <i class="bi bi-shield-check"></i>
-                            </div>
-                            <h3 class="h5">Digital Claims</h3>
-                            <p class="card-text">Automated insurance processing with blockchain verification</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
+                    <div class="card h-100 service-card">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="bi bi-shield-check"></i>
@@ -445,18 +512,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <div class="service-icon">
-                                <i class="bi bi-car-front"></i>
-                            </div>
-                            <h3 class="h5">Free Rental Cars</h3>
-                            <p class="card-text">Complimentary rental car service while your vehicle is being repaired</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
+                    <div class="card h-100 service-card">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="bi bi-cash-stack"></i>
@@ -467,7 +523,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
+                    <div class="card h-100 service-card">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="bi bi-truck"></i>
@@ -478,7 +534,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
+                    <div class="card h-100 service-card">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="bi bi-clipboard-check"></i>
@@ -489,7 +545,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
+                    <div class="card h-100 service-card">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="bi bi-speedometer2"></i>
@@ -518,8 +574,8 @@
                              class="card-img-top project-image" 
                              alt="Auto Body Repair Project">
                         <div class="card-body">
-                            <h3 class="h5">Complete Body Restoration</h3>
-                            <p class="card-text">Full exterior restoration with precision repairs.</p>
+                            <h3 class="h5">Complete Full Loss Assesment</h3>
+                            <p class="card-text">Assessed the situation and came up with fast solutions.</p>
                         </div>
                     </div>
                 </div>
@@ -530,7 +586,7 @@
                              alt="Auto Body Repair Project">
                         <div class="card-body">
                             <h3 class="h5">Precision Panel Repair</h3>
-                            <p class="card-text">ML-powered damage assessment and repair execution.</p>
+                            <p class="card-text">Total Loss assessment with fast execution.</p>
                         </div>
                     </div>
                 </div>

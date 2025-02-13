@@ -18,6 +18,7 @@
             --dark: #1A1A1A;
             --light: #F5F5F5;
             --gray: #808080;
+            --gradient: linear-gradient(135deg, var(--primary), #ff8577);
         }
 
         body {
@@ -225,31 +226,43 @@
 
         /* Services specific styles */
         .service-banner {
-            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)),
-                        url('https://images.unsplash.com/photo-1635773040963-f374ae0f7fd4?auto=format&fit=crop&w=1920') center/cover;
-            padding: 120px 0 60px;
             position: relative;
+            padding: 180px 0 100px;
+            background: none;
             overflow: hidden;
         }
 
-        .service-banner::after {
+        .service-banner::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--primary);
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.8)),
+                        url('https://images.unsplash.com/photo-1597778602022-f2d97b8c1493?auto=format&fit=crop&w=1920');
+            background-position: center;
+            background-size: cover;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            margin-top: -100px;
         }
 
         .service-card {
             background: rgba(44, 62, 80, 0.9);
-            border-radius: 12px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 59, 48, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 59, 48, 0.2);
         }
 
         .service-card::before {
@@ -257,98 +270,102 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 100%;
             height: 100%;
-            background: var(--primary);
-            transition: all 0.3s ease;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
         }
 
         .service-card:hover::before {
-            width: 100%;
             opacity: 0.1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.15);
         }
 
         .service-icon {
             width: 80px;
             height: 80px;
-            background: rgba(255, 59, 48, 0.1);
-            border-radius: 12px;
+            background: var(--gradient);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 2rem;
+            color: var(--light);
             margin-bottom: 1.5rem;
-            font-size: 2.5rem;
-            color: var(--primary);
-            transition: all 0.3s ease;
+            transform: rotate(-5deg);
+            transition: transform 0.4s ease;
         }
 
         .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(-5deg);
-            background: var(--primary);
-            color: var(--light);
+            transform: rotate(5deg) scale(1.1);
         }
 
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0 0;
-        }
-
-        .feature-list li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            color: var(--gray);
-        }
-
-        .feature-list li i {
-            color: var(--primary);
-            margin-right: 1rem;
+        .process-timeline {
+            position: relative;
+            padding: 4rem 0;
         }
 
         .process-step {
-            background: rgba(44, 62, 80, 0.9);
-            border-radius: 12px;
-            padding: 2rem;
-            height: 100%;
             position: relative;
+            padding: 2rem;
+            background: rgba(44, 62, 80, 0.9);
+            border-radius: 20px;
+            margin-bottom: 2rem;
             border: 1px solid rgba(255, 59, 48, 0.2);
+            transition: all 0.4s ease;
         }
 
-        .step-number {
+        .process-step::before {
+            content: '';
             position: absolute;
-            top: -20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
+            left: -2rem;
+            top: 50%;
+            width: 1rem;
+            height: 1rem;
             background: var(--primary);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--light);
+            transform: translateY(-50%);
         }
 
-        /* Mobile Optimizations */
+        .process-step::after {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+            transform: translateY(0);
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .process-step:hover {
+            transform: translateX(10px);
+            border-color: var(--primary);
+        }
+
         @media (max-width: 768px) {
             .service-banner {
-                padding: 80px 0 40px;
+                padding: 120px 0 80px;
             }
 
-            .service-card {
-                padding: 1.5rem;
+            .service-grid {
+                margin-top: -50px;
             }
 
-            .service-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 2rem;
-            }
-
-            .process-step {
-                margin-bottom: 2rem;
+            .process-step::before,
+            .process-step::after {
+                display: none;
             }
         }
     </style>
@@ -394,10 +411,11 @@
 
     <!-- Services Banner -->
     <section class="service-banner">
-        <div class="container">
+        <div class="container position-relative">
             <div class="text-center">
-                <h1 class="display-4 text-light fw-bold mb-4">Our Services</h1>
-                <p class="lead text-gray mb-0">Professional auto body repair services you can trust</p>
+                <span class="badge bg-primary bg-opacity-10 text-primary mb-3">OUR SERVICES</span>
+                <h1 class="display-4 text-light fw-bold mb-4">Expert Auto Services</h1>
+                <p class="lead text-gray mb-0">Comprehensive solutions for all your auto body needs</p>
             </div>
         </div>
     </section>
@@ -405,88 +423,29 @@
     <!-- Main Services -->
     <section class="py-5">
         <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-car-front"></i>
-                        </div>
-                        <h3 class="text-light">Collision Repair</h3>
-                        <p class="text-gray">Expert repair services for all types of collision damage</p>
-                        <ul class="feature-list">
-                            <li><i class="bi bi-check-circle"></i>Frame Straightening</li>
-                            <li><i class="bi bi-check-circle"></i>Panel Replacement</li>
-                            <li><i class="bi bi-check-circle"></i>Paint Matching</li>
-                        </ul>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="bi bi-car-front"></i>
                     </div>
+                    <h3 class="text-light mb-3">Collision Repair</h3>
+                    <p class="text-gray mb-0">Expert repair for vehicles involved in accidents, restoring them to pre-accident condition</p>
                 </div>
-
-                <div class="col-lg-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-shield-check"></i>
-                        </div>
-                        <h3 class="text-light">Insurance Claims</h3>
-                        <p class="text-gray">We handle the entire claims process</p>
-                        <ul class="feature-list">
-                            <li><i class="bi bi-check-circle"></i>Direct Insurance Billing</li>
-                            <li><i class="bi bi-check-circle"></i>Claim Documentation</li>
-                            <li><i class="bi bi-check-circle"></i>Rental Assistance</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-tools"></i>
-                        </div>
-                        <h3 class="text-light">Paint Services</h3>
-                        <p class="text-gray">Professional paint matching and finishing</p>
-                        <ul class="feature-list">
-                            <li><i class="bi bi-check-circle"></i>Color Matching</li>
-                            <li><i class="bi bi-check-circle"></i>Clear Coat Application</li>
-                            <li><i class="bi bi-check-circle"></i>Paint Protection</li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- Add more service cards -->
             </div>
         </div>
     </section>
 
     <!-- Process Section -->
-    <section class="py-5 bg-darker">
+    <section class="process-timeline py-5">
         <div class="container">
-            <h2 class="text-center text-light mb-5">Our Process</h2>
-            <div class="row g-4">
-                <div class="col-md-3">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h4 class="text-light">Assessment</h4>
-                        <p class="text-gray mb-0">Thorough inspection and damage evaluation</p>
-                    </div>
+            <h2 class="text-center mb-5">Our Process</h2>
+            <div class="process-steps ms-4">
+                <div class="process-step">
+                    <h4 class="text-light">Initial Assessment</h4>
+                    <p class="text-gray mb-0">Thorough evaluation of vehicle damage and repair requirements</p>
                 </div>
-                <div class="col-md-3">
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h4 class="text-light">Estimate</h4>
-                        <p class="text-gray mb-0">Detailed cost breakdown and timeline</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h4 class="text-light">Repair</h4>
-                        <p class="text-gray mb-0">Expert repair with quality parts</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h4 class="text-light">Quality Check</h4>
-                        <p class="text-gray mb-0">Final inspection and delivery</p>
-                    </div>
-                </div>
+                <!-- Add more process steps -->
             </div>
         </div>
     </section>

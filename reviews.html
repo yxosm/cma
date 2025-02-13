@@ -49,48 +49,54 @@
         }
 
         .reviews-header {
-            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)),
-                        url('https://images.unsplash.com/photo-1597778602022-f2d97b8c1493?auto=format&fit=crop&w=1920') center/cover;
-            padding: 120px 0;
+            background: none;
+            padding: 180px 0 120px;
             position: relative;
+            overflow: hidden;
         }
 
-        .reviews-header::after {
+        .reviews-header::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--primary);
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.8)),
+                        url('https://images.unsplash.com/photo-1597778602022-f2d97b8c1493?auto=format&fit=crop&w=1920');
+            background-position: center;
+            background-size: cover;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+            z-index: -1;
         }
 
         .review-card {
             background: rgba(44, 62, 80, 0.9);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 59, 48, 0.2);
+            border-radius: 20px;
             padding: 2rem;
             height: 100%;
-            transition: all 0.3s ease;
             position: relative;
+            border: 1px solid rgba(255, 59, 48, 0.2);
+            transition: all 0.4s ease;
             overflow: hidden;
         }
 
         .review-card::before {
             content: '"';
             position: absolute;
-            top: 20px;
+            top: -20px;
             right: 20px;
-            font-size: 8rem;
+            font-size: 12rem;
             font-family: Georgia, serif;
             color: rgba(255, 59, 48, 0.1);
             line-height: 1;
+            z-index: 0;
         }
 
         .review-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.15);
+            transform: translateY(-10px) rotate(1deg);
             border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.15);
         }
 
         .avatar {
@@ -120,9 +126,20 @@
         }
 
         .review-stats {
-            background: rgba(255, 59, 48, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
+            background: rgba(44, 62, 80, 0.9);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-top: -80px;
+            border: 1px solid rgba(255, 59, 48, 0.2);
+            backdrop-filter: blur(10px);
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .review-stats:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.15);
         }
 
         .stat-large {
@@ -178,6 +195,61 @@
             transform: translateY(-2px);
         }
 
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .author-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 59, 48, 0.1);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 59, 48, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .author-badge img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            border: 2px solid var(--primary);
+        }
+
+        .review-card:hover .author-badge {
+            background: rgba(255, 59, 48, 0.2);
+            transform: scale(1.05);
+        }
+
+        .stars-container {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            color: var(--accent);
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover .star {
+            transform: rotate(360deg);
+        }
+
+        .review-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
         /* Enhanced Mobile Responsiveness */
         @media (max-width: 768px) {
             body {
@@ -202,6 +274,7 @@
             .review-stats {
                 padding: 1.5rem;
                 margin: 1rem;
+                margin-top: -40px;
             }
 
             .stat-card {
@@ -251,6 +324,14 @@
             footer .col-lg-3 {
                 text-align: center;
                 margin-bottom: 2rem;
+            }
+
+            .reviews-header {
+                padding: 120px 0 80px;
+            }
+
+            .review-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -324,56 +405,45 @@
             <span class="badge bg-primary bg-opacity-10 text-primary mb-3">TESTIMONIALS</span>
             <h1 class="display-4 text-light fw-bold mb-4">Customer Reviews</h1>
             <p class="lead text-gray mb-5">See what our satisfied customers have to say</p>
-            
-            <!-- Rating Overview -->
-            <div class="review-stats">
-                <div class="row align-items-center">
-                    <div class="col-md-4 text-center mb-4 mb-md-0">
-                        <div class="stat-large">5.0</div>
-                        <div class="stars">★★★★★</div>
-                        <p class="text-gray mb-0">Overall Rating</p>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="d-flex align-items-center mb-2">
-                            <span class="text-light me-2">5★</span>
-                            <div class="rating-bar flex-grow-1">
-                                <div class="rating-fill" style="width: 95%"></div>
-                            </div>
-                            <span class="text-light ms-2">95%</span>
-                        </div>
-                        <div class="d-flex align-items-center mb-2">
-                            <span class="text-light me-2">4★</span>
-                            <div class="rating-bar flex-grow-1">
-                                <div class="rating-fill" style="width: 5%"></div>
-                            </div>
-                            <span class="text-light ms-2">5%</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <span class="text-light me-2">3★</span>
-                            <div class="rating-bar flex-grow-1">
-                                <div class="rating-fill" style="width: 0%"></div>
-                            </div>
-                            <span class="text-light ms-2">0%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Reviews Grid -->
     <section class="py-5">
         <div class="container">
-            <!-- Filter Buttons -->
-            <div class="text-center mb-5">
-                <button class="filter-button active" data-filter="all">All Reviews</button>
-                <button class="filter-button" data-filter="collision">Collision Repair</button>
-                <button class="filter-button" data-filter="insurance">Insurance Claims</button>
-                <button class="filter-button" data-filter="paint">Paint Work</button>
+            <div class="review-stats">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <div class="display-1 text-primary fw-bold me-3">4.9</div>
+                            <div>
+                                <div class="stars-container mb-2">
+                                    <i class="bi bi-star-fill star"></i>
+                                    <i class="bi bi-star-fill star"></i>
+                                    <i class="bi bi-star-fill star"></i>
+                                    <i class="bi bi-star-fill star"></i>
+                                    <i class="bi bi-star-fill star"></i>
+                                </div>
+                                <p class="mb-0 text-gray">Average Rating</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="rating-breakdown mt-4 mt-md-0">
+                            <!-- Add rating bars here -->
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Reviews Container -->
-            <div class="row g-4" id="reviewsContainer">
+            <div class="review-filters mt-5">
+                <button class="filter-button active">All Reviews</button>
+                <button class="filter-button">Collision Repair</button>
+                <button class="filter-button">Insurance Claims</button>
+                <button class="filter-button">Paint Work</button>
+            </div>
+
+            <div class="review-grid" id="reviewsContainer">
                 <!-- Reviews will be populated by JavaScript -->
             </div>
         </div>
@@ -596,18 +666,16 @@
 
         function createReviewCard(review) {
             return `
-                <div class="col-md-6 col-lg-4 review-item">
-                    <div class="review-card">
-                        <div class="author-info">
-                            <div class="avatar">${review.author[0]}</div>
-                            <div>
-                                <h5 class="text-light mb-1">${review.author}</h5>
-                                <div class="stars">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="text-gray mb-0">${review.text}</p>
-                        <div class="review-date">Verified Customer</div>
+                <div class="review-card">
+                    <div class="author-badge">
+                        <img src="https://ui-avatars.com/api/?name=${review.author}&background=FF3B30&color=fff" alt="${review.author}">
+                        <span class="text-light">${review.author}</span>
                     </div>
+                    <div class="stars-container">
+                        ${Array(review.rating).fill('<i class="bi bi-star-fill star"></i>').join('')}
+                    </div>
+                    <p class="text-light mb-3">${review.text}</p>
+                    <p class="text-gray mb-0"><i class="bi bi-clock me-2"></i>Verified Customer</p>
                 </div>
             `;
         }

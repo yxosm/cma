@@ -39,132 +39,199 @@
         }
 
         .about-hero {
-            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)),
-                        url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1920') center/cover;
-            padding: 150px 0 100px;
+            min-height: 70vh;
             position: relative;
+            display: flex;
+            align-items: center;
             overflow: hidden;
         }
 
-        .about-hero::after {
+        .about-hero::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--primary);
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.8)),
+                        url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1920');
+            background-size: cover;
+            background-position: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            z-index: -1;
         }
 
-        .timeline {
+        .history-timeline {
             position: relative;
-            padding: 2rem 0;
+            padding: 4rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: var(--primary);
+            transform: translateX(-50%);
         }
 
         .timeline-item {
             position: relative;
-            padding: 2rem;
+            margin-bottom: 4rem;
+            width: 50%;
+            padding-right: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: auto;
+            padding-right: 0;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
             background: rgba(44, 62, 80, 0.9);
-            border-radius: 15px;
-            margin-bottom: 2rem;
+            border-radius: 20px;
+            padding: 2rem;
             border: 1px solid rgba(255, 59, 48, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .timeline-item:hover {
-            transform: translateX(10px);
-            border-color: var(--primary);
-        }
-
-        .timeline-icon {
-            width: 60px;
-            height: 60px;
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -3rem;
+            width: 3rem;
+            height: 2px;
             background: var(--primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--light);
-            margin-bottom: 1rem;
-            transform: rotate(-5deg);
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: auto;
+            left: -3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 50%;
+            right: -4rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary);
+            border-radius: 50%;
+            transform: translateY(-50%);
             transition: all 0.3s ease;
         }
 
-        .timeline-item:hover .timeline-icon {
-            transform: rotate(5deg) scale(1.1);
+        .timeline-item:nth-child(even) .timeline-dot {
+            right: auto;
+            left: -4rem;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.15);
+        }
+
+        .timeline-content:hover .timeline-dot {
+            transform: translateY(-50%) scale(1.5);
+            box-shadow: 0 0 20px rgba(255, 59, 48, 0.5);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: -100px;
+            position: relative;
+            z-index: 1;
         }
 
         .team-card {
             background: rgba(44, 62, 80, 0.9);
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(255, 59, 48, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
 
         .team-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
+            transform: rotateY(10deg) translateY(-10px);
+            border-color: var (--primary);
+            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.15);
         }
 
         .team-image {
             width: 120px;
             height: 120px;
-            border-radius: 15px;
+            border-radius: 20px;
             margin: -60px auto 20px;
             overflow: hidden;
             border: 4px solid var(--primary);
-            position: relative;
             transform: rotate(-5deg);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .team-card:hover .team-image {
-            transform: rotate(5deg);
+            transform: rotate(5deg) translateZ(20px);
         }
 
-        .stats-card {
-            background: rgba(44, 62, 80, 0.9);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid rgba(255, 59, 48, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .stats-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            font-family: 'Rajdhani', sans-serif;
-            line-height: 1;
-            margin-bottom: 1rem;
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
         }
 
         .values-card {
             background: rgba(44, 62, 80, 0.9);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 2rem;
-            height: 100%;
             border: 1px solid rgba(255, 59, 48, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .values-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
         }
 
         .values-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             border-color: var(--primary);
+        }
+
+        .values-card:hover::before {
+            opacity: 0.05;
         }
 
         .values-icon {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .values-card:hover .values-icon {
+            transform: scale(1.2) rotate(10deg);
         }
 
         /* Mobile Optimizations */
@@ -173,8 +240,40 @@
                 padding: 100px 0 60px;
             }
 
+            .timeline-line {
+                left: 1rem;
+            }
+
             .timeline-item {
-                padding: 1.5rem;
+                width: 100%;
+                padding-left: 3rem;
+                padding-right: 0;
+            }
+
+            .timeline-item:nth-child(even) {
+                padding-left: 3rem;
+            }
+
+            .timeline-content::before {
+                left: -3rem;
+                right: auto;
+            }
+
+            .timeline-dot {
+                left: -3.5rem;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -3rem;
+            }
+
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: -3.5rem;
+            }
+
+            .team-grid {
+                margin-top: -50px;
             }
 
             .team-image {
@@ -193,7 +292,7 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-dark">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
@@ -273,31 +372,31 @@
         </div>
     </section>
 
-    <!-- Our Journey -->
-    <section class="py-5">
+    <!-- History Timeline -->
+    <section class="history-timeline">
         <div class="container">
-            <h2 class="text-center mb-5">Our Journey</h2>
-            <div class="timeline">
+            <div class="timeline-line"></div>
+            <div class="timeline-items">
                 <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i class="bi bi-flag"></i>
+                    <div class="timeline-content">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-light">2010 - The Beginning</h3>
+                        <p class="text-gray mb-0">Started as a small repair shop with a vision for excellence</p>
                     </div>
-                    <h3 class="text-light">2010 - The Beginning</h3>
-                    <p class="text-gray mb-0">Started as a small repair shop with a vision for excellence</p>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i class="bi bi-graph-up"></i>
+                    <div class="timeline-content">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-light">2015 - Major Expansion</h3>
+                        <p class="text-gray mb-0">Upgraded to state-of-the-art facility with advanced equipment</p>
                     </div>
-                    <h3 class="text-light">2015 - Major Expansion</h3>
-                    <p class="text-gray mb-0">Upgraded to state-of-the-art facility with advanced equipment</p>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i class="bi bi-trophy"></i>
+                    <div class="timeline-content">
+                        <div class="timeline-dot"></div>
+                        <h3 class="text-light">2020 - Industry Recognition</h3>
+                        <p class="text-gray mb-0">Received multiple awards for outstanding service and quality</p>
                     </div>
-                    <h3 class="text-light">2020 - Industry Recognition</h3>
-                    <p class="text-gray mb-0">Received multiple awards for outstanding service and quality</p>
                 </div>
             </div>
         </div>
@@ -307,27 +406,21 @@
     <section class="py-5 bg-darker">
         <div class="container">
             <h2 class="text-center mb-5">Our Values</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="values-card">
-                        <i class="bi bi-shield-check values-icon"></i>
-                        <h3 class="text-light">Quality</h3>
-                        <p class="text-gray mb-0">We never compromise on the quality of our repairs</p>
-                    </div>
+            <div class="values-grid">
+                <div class="values-card">
+                    <i class="bi bi-shield-check values-icon"></i>
+                    <h3 class="text-light">Quality</h3>
+                    <p class="text-gray mb-0">We never compromise on the quality of our repairs</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="values-card">
-                        <i class="bi bi-clock-history values-icon"></i>
-                        <h3 class="text-light">Efficiency</h3>
-                        <p class="text-gray mb-0">Quick turnaround without sacrificing quality</p>
-                    </div>
+                <div class="values-card">
+                    <i class="bi bi-clock-history values-icon"></i>
+                    <h3 class="text-light">Efficiency</h3>
+                    <p class="text-gray mb-0">Quick turnaround without sacrificing quality</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="values-card">
-                        <i class="bi bi-people values-icon"></i>
-                        <h3 class="text-light">Customer First</h3>
-                        <p class="text-gray mb-0">Your satisfaction is our top priority</p>
-                    </div>
+                <div class="values-card">
+                    <i class="bi bi-people values-icon"></i>
+                    <h3 class="text-light">Customer First</h3>
+                    <p class="text-gray mb-0">Your satisfaction is our top priority</p>
                 </div>
             </div>
         </div>
@@ -337,30 +430,24 @@
     <section class="py-5">
         <div class="container">
             <h2 class="text-center mb-5">Meet Our Team</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="team-card text-center p-4">
-                        <div class="team-image bg-primary"></div>
-                        <h3 class="text-light">John Smith</h3>
-                        <p class="text-primary mb-2">Lead Technician</p>
-                        <p class="text-gray mb-0">15+ years of experience in auto body repair</p>
-                    </div>
+            <div class="team-grid">
+                <div class="team-card text-center p-4">
+                    <div class="team-image bg-primary"></div>
+                    <h3 class="text-light">John Smith</h3>
+                    <p class="text-primary mb-2">Lead Technician</p>
+                    <p class="text-gray mb-0">15+ years of experience in auto body repair</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="team-card text-center p-4">
-                        <div class="team-image bg-primary"></div>
-                        <h3 class="text-light">Sarah Johnson</h></h3>
-                        <p class="text-primary mb-2">Customer Service Manager</p>
-                        <p class="text-gray mb-0">10+ years in automotive customer service</p>
-                    </div>
+                <div class="team-card text-center p-4">
+                    <div class="team-image bg-primary"></div>
+                    <h3 class="text-light">Sarah Johnson</h3>
+                    <p class="text-primary mb-2">Customer Service Manager</p>
+                    <p class="text-gray mb-0">10+ years in automotive customer service</p>
                 </div>
-                <div class="col-md-4">
-                    <div class="team-card text-center p-4">
-                        <div class="team-image bg-primary"></div>
-                        <h3 class="text-light">Mike Wilson</h3>
-                        <p class="text-primary mb-2">Paint Specialist</p>
-                        <p class="text-gray mb-0">12+ years of paint matching expertise</p>
-                    </div>
+                <div class="team-card text-center p-4">
+                    <div class="team-image bg-primary"></div>
+                    <h3 class="text-light">Mike Wilson</h3>
+                    <p class="text-primary mb-2">Paint Specialist</p>
+                    <p class="text-gray mb-0">12+ years of paint matching expertise</p>
                 </div>
             </div>
         </div>

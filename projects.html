@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Studies - CarMaster Auto Body</title>
+    <title>Projects - CarMaster Auto Body</title>
 
     <!-- Apple Meta Tags for iMessage -->
     <meta name="apple-mobile-web-app-title" content="CarMaster Auto">
@@ -14,12 +14,17 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #6366f1;
-            --secondary-color: #4f46e5;
-            --accent-color: #818cf8;
+            --primary: #FF3B30;
+            --secondary: #2C3E50;
+            --accent: #F39C12;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+            --gray: #808080;
         }
 
         body {
@@ -28,32 +33,38 @@
         }
 
         .project-card {
-            border: none;
-            background: var(--light-color);
-            transition: all 0.3s ease;
+            background: rgba(44, 62, 80, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 59, 48, 0.2);
+            transition: all 0.4s ease;
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.08);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 59, 48, 0.15);
+            border-color: var(--primary);
         }
 
-        .project-image-container {
+        .project-image-wrap {
             position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
             overflow: hidden;
-            border-radius: 8px;
         }
 
         .project-image {
-            aspect-ratio: 16/9;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: transform 0.5s ease;
+            transition: all 0.5s ease;
         }
-        
-        .project-image:hover {
-            transform: scale(1.02);
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
         }
 
         .project-overlay {
@@ -62,193 +73,132 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(rgba(230, 57, 70, 0), rgba(29, 53, 87, 0.8));
+            background: linear-gradient(rgba(26, 26, 26, 0), rgba(26, 26, 26, 0.9));
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
         }
 
         .project-card:hover .project-overlay {
             opacity: 1;
         }
 
-        .project-card:hover .project-image {
-            transform: scale(1.1);
+        .project-content {
+            padding: 2rem;
+            background: rgba(44, 62, 80, 0.9);
+        }
+
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 59, 48, 0.1);
+            border-radius: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .tech-badge {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary-color);
+            display: inline-block;
             padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-row {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(129, 140, 248, 0.05));
-            border-radius: 16px;
-            padding: 1.5rem;
-        }
-
-        .metric-number {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;  /* Added standard property */
-            -webkit-text-fill-color: transparent;
-        }
-
-        .repair-stats {
-            background: var(--secondary-color);
-            color: var(--light-color);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .repair-stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .repair-type-badge {
-            background: rgba(230, 57, 70, 0.1);
-            color: var(--primary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        .navbar {
-            backdrop-filter: blur(10px);
-            background: var(--surface-color) !important;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            background: rgba(255, 59, 48, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            margin: 0.25rem;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            z-index: 1030;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .navbar.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            background: rgba(255, 255, 255, 0.98) !important;
+        .tech-badge:hover {
+            background: var(--primary);
+            color: var(--light);
+            transform: translateY(-2px);
         }
 
-        .carousel-control-prev,
-        .carousel-control-next {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-            margin: 0 1rem;
-        }
-
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            filter: invert(1);
-        }
-
-        .carousel {
-            border-radius: 24px;
+        .before-after-slider {
+            position: relative;
+            width: 100%;
+            height: 400px;
             overflow: hidden;
+            border-radius: 15px;
         }
 
-        .carousel-item {
-            transition: transform 0.6s ease-in-out;
+        .image-compare {
+            position: absolute;
+            width: 100%;
+            height: 100%;
         }
 
-        .carousel-item img {
-            transition: transform 0.5s ease;
+        .image-compare img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .carousel:hover img {
-            transform: scale(1.02);
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+            cursor: ew-resize;
+            z-index: 10;
         }
 
-        .modal-image {
-            max-height: 80vh;
-            object-fit: contain;
+        .slider-handle::after {
+            content: '⇄';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--primary);
+            color: var(--light);
+            padding: 1rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            border-radius: 12px;
-            padding: 8px 24px; /* Reduced padding */
-            font-size: 0.9rem; /* Smaller font size */
-        }
-
-        /* Enhanced Mobile Responsiveness */
+        /* Mobile Optimizations */
         @media (max-width: 768px) {
-            body {
-                padding-top: 60px;
+            .project-content {
+                padding: 1.5rem;
             }
 
-            .project-card {
-                margin: 0.5rem 0;
+            .project-stats {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 1rem;
             }
 
-            .project-image {
-                height: 200px;
-                border-radius: 12px;
+            .stat-number {
+                font-size: 1.5rem;
             }
 
-            .carousel-control-prev,
-            .carousel-control-next {
-                width: 32px;
-                height: 32px;
-                background: rgba(255, 255, 255, 0.9);
-                top: 50%;
-                transform: translateY(-50%);
-            }
-
-            .carousel-control-prev {
-                left: 0.5rem;
-            }
-
-            .carousel-control-next {
-                right: 0.5rem;
-            }
-
-            .navbar-brand img {
-                height: 45px;
-            }
-
-            .metric-number {
-                font-size: 1.75rem;
+            .before-after-slider {
+                height: 300px;
             }
 
             .tech-badge {
-                font-size: 0.75rem;
                 padding: 0.35rem 0.75rem;
-            }
-
-            .modal-image {
-                max-height: 70vh;
-            }
-
-            .btn-primary {
-                width: 100%;
-                margin-top: 0.5rem;
-            }
-
-            footer .col-lg-4, 
-            footer .col-lg-3 {
-                text-align: center;
-                margin-bottom: 2rem;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
-<body>
+<body class="bg-dark">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
@@ -287,158 +237,106 @@
         </div>
     </nav>
 
-    <!-- Projects Section -->
+    <!-- Projects Header -->
     <section class="py-5 mt-5">
         <div class="container">
             <div class="text-center mb-5">
-                <span class="badge bg-primary bg-opacity-10 text-primary mb-2">CASE STUDIES</span>
-                <h1 class="display-4 fw-bold mb-3">Our Work.</h1>
-                <p class="lead text-muted">Real results backed by data</p>
+                <span class="badge bg-primary bg-opacity-10 text-primary mb-2">OUR WORK</span>
+                <h1 class="display-4 text-light fw-bold mb-3">Recent Projects</h1>
+                <p class="lead text-gray">Showcasing our expertise in auto body repair</p>
             </div>
 
-            <!-- Project Cards -->
+            <!-- Projects Grid -->
             <div class="row g-4">
-                <!-- GMC Terrain Case Study -->
-                <div class="col-12 mb-5">
-                    <div class="project-card p-4">
-                        <div class="row">
-                            <div class="col-lg-6 mb-4 mb-lg-0">
-                                <div id="gmcCarousel" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#gmcCarousel" data-bs-slide-to="0" class="active"></button>
-                                    </div>
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <div class="project-image-container">
-                                                <img src="https://i.ibb.co/GvgD5ymF/IMG-2248-jpg.jpg" 
-                                                     alt="GMC Terrain Repair - Before" 
-                                                     class="project-image w-100"
-                                                     data-bs-toggle="modal"
-                                                     data-bs-target="#imageModal">
-                                                <div class="project-overlay"></div>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <div class="project-image-container">
-                                                <img src="https://i.ibb.co/GvgD5ymF/IMG-2248-jpg.jpg" 
-                                                     alt="GMC Terrain Repair - After" 
-                                                     class="project-image w-100"
-                                                     data-bs-toggle="modal"
-                                                     data-bs-target="#imageModal">
-                                                <div class="project-overlay"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#gmcCarousel" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#gmcCarousel" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
+                <!-- Project 1 -->
+                <div class="col-lg-6">
+                    <div class="project-card">
+                        <div class="project-image-wrap">
+                            <img src="https://i.ibb.co/GvgD5ymF/IMG-2248-jpg.jpg" 
+                                 alt="GMC Terrain Repair" 
+                                 class="project-image">
+                            <div class="project-overlay">
+                                <div class="text-light">
+                                    <h3>View Details</h3>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <h2 class="h3 mb-3">GMC Terrain Front Collision</h2>
-                                <div class="mb-4">
-                                    <span class="tech-badge">AI Assessment</span>
-                                    <span class="tech-badge">IoT Monitoring</span>
-                                    <span class="tech-badge">Digital Claims</span>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="text-light mb-3">GMC Terrain Collision Repair</h3>
+                            <div class="mb-3">
+                                <span class="tech-badge">Front Impact</span>
+                                <span class="tech-badge">Frame Repair</span>
+                                <span class="tech-badge">Paint Match</span>
+                            </div>
+                            <p class="text-gray">Complete front-end collision repair with structural reinforcement</p>
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number">48h</div>
+                                    <div class="text-gray">Turnaround</div>
                                 </div>
-                                <p class="text-muted mb-4">
-                                    A thorough inspection revealed extensive structural damage, resulting in the decision to declare the vehicle a total loss.
-                                </p>
-                                <div class="row g-4 metric-row">
-                                    <div class="col-6 col-md-3">
-                                        <div class="metric-number">47%</div>
-                                        <p class="mb-0 small">Time Saved</p>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="metric-number">100%</div>
-                                        <p class="mb-0 small">Accuracy</p>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="metric-number">2.1x</div>
-                                        <p class="mb-0 small">Efficiency</p>
-                                    </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">100%</div>
+                                    <div class="text-gray">Accuracy</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">5★</div>
+                                    <div class="text-gray">Rating</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Honda Civic Case Study -->
-                <div class="col-12">
-                    <div class="project-card p-4">
-                        <div class="row">
-                            <div class="col-lg-6 mb-4 mb-lg-0">
-                                <div id="hondaCarousel" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#hondaCarousel" data-bs-slide-to="0" class="active"></button>
-                                        <button type="button" data-bs-target="#hondaCarousel" data-bs-slide-to="1"></button>
-                                    </div>
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <div class="project-image-container">
-                                                <img src="https://i.ibb.co/fdwdy48T/IMG-2255.jpg" 
-                                                     alt="Honda Civic Repair - Before" 
-                                                     class="project-image w-100"
-                                                     data-bs-toggle="modal"
-                                                     data-bs-target="#imageModal">
-                                                <div class="project-overlay"></div>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <div class="project-image-container">
-                                                <img src="https://img001.prntscr.com/file/img001/uTMgfIoiSleb_zF4AZOqug.png" 
-                                                     alt="Honda Civic Repair - After" 
-                                                     class="project-image w-100"
-                                                     data-bs-toggle="modal"
-                                                     data-bs-target="#imageModal">
-                                                <div class="project-overlay"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#hondaCarousel" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#hondaCarousel" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
+                <!-- Project 2 -->
+                <div class="col-lg-6">
+                    <div class="project-card">
+                        <div class="project-image-wrap">
+                            <img src="https://i.ibb.co/fdwdy48T/IMG-2255.jpg" 
+                                 alt="Honda Civic Repair" 
+                                 class="project-image">
+                            <div class="project-overlay">
+                                <div class="text-light">
+                                    <h3>View Details</h3>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <h2 class="h3 mb-3">Honda Civic Rear Collision</h2>
-                                <div class="mb-4">
-                                    <span class="tech-badge">Computer Vision</span>
-                                    <span class="tech-badge">Smart Estimates</span>
-                                    <span class="tech-badge">Blockchain</span>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="text-light mb-3">Honda Civic Total Loss</h3>
+                            <div class="mb-3">
+                                <span class="tech-badge">Rear Impact</span>
+                                <span class="tech-badge">Insurance Claim</span>
+                                <span class="tech-badge">Total Loss</span>
+                            </div>
+                            <p class="text-gray">Expert handling of total loss claim with maximum value recovery</p>
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number">24h</div>
+                                    <div class="text-gray">Processing</div>
                                 </div>
-                                <p class="text-muted mb-4">
-                                    Severe rear-end damage was assessed, leading to the determination that the vehicle was a total loss.
-                                </p>
-                                <div class="row g-4 metric-row">
-                                    <div class="col-6 col-md-3">
-                                        <div class="metric-number">100%</div>
-                                        <p class="mb-0 small">Time Saved</p>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="metric-number">10x</div>
-                                        <p class="mb-0 small">Efficiency</p>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="metric-number">$10k+</div>
-                                        <p class="mb-0 small">Cost Saved</p>
-                                    </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">15k</div>
+                                    <div class="text-gray">Settlement</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">5★</div>
+                                    <div class="text-gray">Rating</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5 bg-primary">
+        <div class="container text-center">
+            <h2 class="text-light mb-4">Ready to Start Your Project?</h2>
+            <p class="lead text-light mb-4">Get in touch for a free consultation</p>
+            <button class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#appointmentModal">
+                Contact Us Now
+            </button>
         </div>
     </section>
 
